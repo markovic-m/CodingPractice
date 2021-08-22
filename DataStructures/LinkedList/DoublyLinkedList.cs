@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodingPractice.DataStructures.Common;
+using System;
 
 namespace CodingPractice.DataStructures.LinkedList
 {
@@ -18,11 +19,12 @@ namespace CodingPractice.DataStructures.LinkedList
             var newNode = new DoublyLinkedNode<T>(item, null, null);
             if (head == null)
             {
-                head = newNode;
+                tail = head = newNode;
             }
             else
             {
                 newNode.next = head;
+                head.prev = newNode;
                 head = newNode;
             }
         }
@@ -37,6 +39,7 @@ namespace CodingPractice.DataStructures.LinkedList
             }
             tempHead.next = newNode;
             newNode.prev = tempHead;
+            tail = newNode;
         }
 
         public void Delete(T item)
@@ -82,7 +85,8 @@ namespace CodingPractice.DataStructures.LinkedList
                 tempHead = tempHead.next;
             }
             var temp = tempHead.next;
-            tempHead.next = null;
+            tail = tempHead;
+            tail.next = null;
             temp.next = null;
             temp.prev = null;
             temp.Dispose();
@@ -93,11 +97,50 @@ namespace CodingPractice.DataStructures.LinkedList
             if (head == null)
                 return;
 
-
             var temp = head;
             head = head.next;
+            head.prev = null;
             temp.next = null;
             temp.Dispose();
+        }
+        public bool InsertAtIndex(T item, int index)
+        {
+            var newNode = new DoublyLinkedNode<T>(item, null, null);
+            if (head == null)
+            {
+                if (index == 0)
+                {
+                    head = tail = newNode;
+                    return true;
+                }
+                else return false;
+            }
+
+            if (index == 0)
+            {
+                InsertAtHead(item);
+                return true;
+            }
+
+            var tempHead = head;
+            for (int i = 0; i < index - 1; i++)
+            {
+                tempHead = tempHead.next;
+            }
+
+            if (tempHead.next == null)
+            {
+                InsertAtTail(item);
+            }
+            else
+            {
+                var tmp = tempHead.next;
+                tempHead.next = newNode;
+                newNode.prev = tempHead;
+                newNode.next = tmp;
+                tmp.prev = newNode;
+            }
+            return true;
         }
 
         public int Find(T item)

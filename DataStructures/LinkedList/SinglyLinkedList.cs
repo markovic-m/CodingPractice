@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CodingPractice.DataStructures.Common;
+using System;
 
 namespace CodingPractice.DataStructures.LinkedList
 {
     public class SinglyLinkedList<T>
     {
-        SinglyLinkedNode<T> head;
+        public SinglyLinkedNode<T> head;
 
         public SinglyLinkedList()
         {
@@ -62,9 +63,41 @@ namespace CodingPractice.DataStructures.LinkedList
             head = temphead;
         }
 
-        public void InsertAtIndex(T item, int index)
+        public bool InsertAtIndex(T item, int index)
         {
+            if (head == null)
+            {
+                if (index == 0)
+                {
+                    InsertAtHead(item);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
+            var tempHead = head;
+            for (int i = 0; i < index - 1; i++)
+            {
+                if (tempHead == null) return false;
+
+                tempHead = tempHead.next;
+            }
+            var node = new SinglyLinkedNode<T>(item, null);
+            if (tempHead.next == null)
+            {
+                tempHead.next = node;
+                return true;
+            }
+            else
+            {
+                var tmp = tempHead.next;
+                tempHead.next = node;
+                node.next = tmp;
+            }
+            return true;
         }
 
 

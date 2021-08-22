@@ -23,6 +23,16 @@ namespace CodingPractice.DataStructures.Array
             _elementCount = 0;
         }
 
+        public T Get(int index)
+        {
+            if (index < 0 || index > _internalStaticArray.Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            else
+                return _internalStaticArray[index];
+        }
+
         public void Insert(T item)
         {
             if (item is null)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodingPractice.DataStructures.LinkedList
+namespace CodingPractice.DataStructures.Common
 {
     public class DoublyLinkedNode<T>
     {
