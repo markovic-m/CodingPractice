@@ -5,13 +5,15 @@ namespace CodingPractice.DataStructures.LinkedList
 {
     public class DoublyLinkedList<T>
     {
-        DoublyLinkedNode<T> head;
-        DoublyLinkedNode<T> tail;
+        public DoublyLinkedNode<T> head;
+        public DoublyLinkedNode<T> tail;
+        public int ElementCount { get; private set; }
 
         public DoublyLinkedList()
         {
             head = null;
             tail = null;
+            ElementCount = 0;
         }
 
         public void InsertAtHead(T item)
@@ -27,6 +29,14 @@ namespace CodingPractice.DataStructures.LinkedList
                 head.prev = newNode;
                 head = newNode;
             }
+            ElementCount++;
+        }
+
+        public void InsertAtTailEfficient(T item)
+        {
+            tail.next = new DoublyLinkedNode<T>(item, null, null);
+            tail.next.prev = tail;
+            ElementCount++;
         }
 
         public void InsertAtTail(T item)
@@ -40,6 +50,7 @@ namespace CodingPractice.DataStructures.LinkedList
             tempHead.next = newNode;
             newNode.prev = tempHead;
             tail = newNode;
+            ElementCount++;
         }
 
         public void Delete(T item)
@@ -64,6 +75,7 @@ namespace CodingPractice.DataStructures.LinkedList
                     tempTrav.next = null;
                     tempTrav.prev = null;
                     tempTrav.Dispose();
+                    ElementCount--;
                     return;
                 }
                 else
@@ -90,6 +102,18 @@ namespace CodingPractice.DataStructures.LinkedList
             temp.next = null;
             temp.prev = null;
             temp.Dispose();
+            ElementCount--;
+        }
+
+        public void DeleteAtTailEfficient()
+        {
+            var tmp = tail;
+            tail = tail.prev;
+            tail.next = null;
+            tmp.prev = null;
+            tmp.next = null;
+            tmp.Dispose();
+            ElementCount--;
         }
 
         public void DeleteAtHead()
@@ -102,6 +126,7 @@ namespace CodingPractice.DataStructures.LinkedList
             head.prev = null;
             temp.next = null;
             temp.Dispose();
+            ElementCount--;
         }
         public bool InsertAtIndex(T item, int index)
         {

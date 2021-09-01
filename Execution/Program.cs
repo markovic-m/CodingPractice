@@ -1,6 +1,8 @@
 ﻿using CodingPractice.DataStructures.Array;
 using CodingPractice.DataStructures.LinkedList;
+using CodingPractice.DataStructures.Queue;
 using CodingPractice.DataStructures.Stack;
+using CodingPractice.DataStructures.Tree;
 using System;
 
 namespace Execution
@@ -13,8 +15,49 @@ namespace Execution
             //TestSinglyLinkedList();
             //TestDoublyLinkedList();
             //TestDynamicArrayStack();
-            TestLinkedListStack();
+            //TestLinkedListStack();
+            //TestQeueue();
+            TestBST();
             Console.Read();
+        }
+        public static void TestBST()
+        {
+            var tree = new BinarySearchTree();
+            tree.Insert(32);
+            tree.Insert(11, tree.root);
+            tree.Insert(43, tree.root);
+            tree.Insert(21, tree.root);
+            tree.Insert(7, tree.root);
+            tree.Insert(33, tree.root);
+            tree.Insert(9, tree.root);
+            tree.Insert(46, tree.root);
+            tree.Insert(12, tree.root);
+            tree.Print();
+        }
+
+        public static void TestQeueue()
+        {
+            var queue = new Queue<int>();
+            queue.Print();
+            queue.Enqueue(1);
+            queue.Print();
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+            queue.Enqueue(4);
+            queue.Enqueue(5);
+            queue.Enqueue(6);
+            queue.Enqueue(7);
+            queue.Enqueue(8);
+            queue.Enqueue(9);
+
+            queue.Print();
+            Console.WriteLine(queue.Dequeue().ToString());
+            Console.WriteLine(queue.Dequeue().ToString());
+            Console.WriteLine(queue.Dequeue().ToString());
+            Console.WriteLine(queue.Dequeue().ToString());
+            Console.WriteLine(queue.Dequeue().ToString());
+            Console.WriteLine(queue.Dequeue().ToString());
+            queue.Print();
         }
 
         public static void TestLinkedListStack()

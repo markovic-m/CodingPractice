@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingPractice.DataStructures", "DataStructures\CodingPractice.DataStructures.csproj", "{C2E94EC4-8121-4FD3-8CF8-5FB2E529E60A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingPractice.DataStructures", "DataStructures\CodingPractice.DataStructures.csproj", "{C2E94EC4-8121-4FD3-8CF8-5FB2E529E60A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingPractice.Execution", "Execution\CodingPractice.Execution.csproj", "{B69E8F7B-F016-417D-95B4-FD7B8F4EEAED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingPractice.Execution", "Execution\CodingPractice.Execution.csproj", "{B69E8F7B-F016-417D-95B4-FD7B8F4EEAED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingPractice.CTCIQuestions", "CodingPractice.CTCIQuestions\CodingPractice.CTCIQuestions.csproj", "{E3833C76-9F91-45B9-B83A-E9185753839F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B69E8F7B-F016-417D-95B4-FD7B8F4EEAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B69E8F7B-F016-417D-95B4-FD7B8F4EEAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B69E8F7B-F016-417D-95B4-FD7B8F4EEAED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3833C76-9F91-45B9-B83A-E9185753839F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3833C76-9F91-45B9-B83A-E9185753839F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3833C76-9F91-45B9-B83A-E9185753839F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3833C76-9F91-45B9-B83A-E9185753839F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
