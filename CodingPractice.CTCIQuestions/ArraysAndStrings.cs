@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CodingPractice.CTCIQuestions
 {
@@ -138,6 +139,13 @@ namespace CodingPractice.CTCIQuestions
             bool firstStrike = false;
             for (int i = 0, j = 0; i < s1.Length || j < s2.Length; i++, j++)
             {
+                if (i == s1.Length || j == s2.Length)
+                {
+                    if (firstStrike)
+                        return false;
+                    else return true;
+                }
+
                 if (s1[i] != s2[j])
                 {
                     if (firstStrike)
@@ -166,6 +174,136 @@ namespace CodingPractice.CTCIQuestions
                 }
             }
             return true;
+        }
+
+        public string Compression(string s)
+        {
+            if (s == null || s.Length == 0)
+                return s;
+
+            StringBuilder str = new StringBuilder();
+            char lastChar = s[0];
+            int currentCharCount = 1;
+            str.Append(s[0]);
+            for (int i = 1; i < s.Length; i++)
+            {
+                if (s[i] == lastChar)
+                {
+                    currentCharCount++;
+                }
+                else
+                {
+                    if (currentCharCount > 0)
+                    {
+                        str.Append(currentCharCount);
+                    }
+                    currentCharCount = 1;
+                    lastChar = s[i];
+                    str.Append(lastChar);
+                }
+
+            }
+            str.Append(currentCharCount);
+
+            return str.Length > 0 && str.Length < s.Length ? str.ToString() : s;
+        }
+
+        public int[,] RotateMatrix(int[,] matrix)
+        {
+            void RotateLayer(int layerNumber)
+            {
+                var length = matrix.GetLength(1) - (layerNumber * 2);
+                if (length == 1)
+                    return;
+
+                int[] helperArray = new int[length];
+                for (int j = layerNumber; j < length; j++)
+                {
+                    helperArray[j] = matrix[length - 1 - layerNumber, j];
+                    matrix[length - 1 + layerNumber, j] = matrix[j, layerNumber];
+                }
+                for (int j = layerNumber; j < length; j++)
+                {
+                    matrix[j, layerNumber] = matrix[layerNumber, length - 1 + layerNumber - j];
+                }
+                for (int j = layerNumber; j < length; j++)
+                {
+                    matrix[layerNumber, length + layerNumber - 1 - j] = matrix[length + layerNumber - 1 - j, length - 1];
+                }
+                for (int j = layerNumber; j < length; j++)
+                {
+                    matrix[length - 1 + layerNumber - j, length + layerNumber - 1] = helperArray[j];
+                }
+            }
+
+            if (matrix.GetLength(1) <= 1)
+            {
+                return matrix;
+            }
+
+            for (int i = 0; i < matrix.GetLength(1) / 2; i++)
+            {
+                RotateLayer(i);
+            }
+            return matrix;
+        }
+
+        public void NullifyMatrix(int[,] matrix)
+        {
+            Dictionary<int, int> rows = new Dictionary<int, int>();
+            Dictionary<int, int> columns = new Dictionary<int, int>();
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[i, j] == 0)
+                    {
+                        if (!rows.ContainsKey(i))
+                            rows.Add(i, i);
+                        if (!columns.ContainsKey(j))
+                            columns.Add(j, j);
+                    }
+                }
+            }
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (columns.ContainsKey(j))
+                    {
+                        matrix[i, j] = 0;
+                    }
+                    if (rows.ContainsKey(i))
+                    {
+                        matrix[i, j] = 0;
+                    }
+                }
+            }
+        }
+
+        public bool IsRotatedString(string s1, string s2)
+        {
+            if (s1.Length != s2.Length)
+                return false;
+
+            int tracker = 0;
+            for (int i = 0; i < s1.Length; i++)
+            {
+                if (s1[tracker] == s2[i])
+                {
+                    tracker++;
+                }
+                else
+                {
+                    tracker = 0;
+                }
+            }
+            //if (s1.Contains(s2.Substring()))
+            //{
+
+            //}
+            return false;
         }
     }
 }
