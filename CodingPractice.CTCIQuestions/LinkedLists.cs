@@ -175,6 +175,7 @@ namespace CodingPractice.CTCIQuestions
                 list.head = beforeListHead;
             }
         }
+
         public LinkedList Add(LinkedList list1, LinkedList list2)
         {
             if (list1 == null || list1.head == null)
@@ -205,6 +206,7 @@ namespace CodingPractice.CTCIQuestions
             }
             return resultingList;
         }
+
         public LinkedList Add2(LinkedList list1, LinkedList list2)
         {
             if (list1 == null || list1.head == null)
@@ -254,6 +256,41 @@ namespace CodingPractice.CTCIQuestions
                 carry = sum > 9 ? 1 : 0;
             }
             return resultingList;
+        }
+
+
+        public bool IsPalindrome(LinkedList list)
+        {
+            if (list == null || list.head == null)
+            {
+                return false;//true?
+            }
+            var dict = new Dictionary<int, int>();
+            var tempHead = list.head;
+            while (tempHead != null)
+            {
+                if (!dict.ContainsKey(tempHead.val))
+                {
+                    dict.Add(tempHead.val, 1);
+                }
+                else
+                {
+                    dict[tempHead.val]++;
+                }
+                tempHead = tempHead.next;
+            }
+
+            var firstStrike = false;
+            foreach (var item in dict)
+            {
+                if (item.Value % 2 != 0)
+                {
+                    if (firstStrike)
+                        return false;
+                    firstStrike = true;
+                }
+            }
+            return true;
         }
     }
 }

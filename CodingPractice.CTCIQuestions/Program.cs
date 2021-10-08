@@ -79,22 +79,24 @@ namespace CodingPractice.CTCIQuestions
             LinkedLists linkedLists = new LinkedLists();
 
             var list = new LinkedLists.LinkedList();
-            list.head = new LinkedLists.Node(2);
+            list.head = new LinkedLists.Node(9);
             list.head.next = new LinkedLists.Node(3);
-            list.head.next.next = new LinkedLists.Node(4);
+            list.head.next.next = new LinkedLists.Node(3);
             list.head.next.next.next = new LinkedLists.Node(9);
+            list.head.next.next.next.next = new LinkedLists.Node(9);
 
             var list1 = new LinkedLists.LinkedList();
             list1.head = new LinkedLists.Node(9);
             list1.head.next = new LinkedLists.Node(3);
-            list1.head.next.next = new LinkedLists.Node(4);
+            list1.head.next.next = new LinkedLists.Node(3);
             list1.head.next.next.next = new LinkedLists.Node(9);
 
             //linkedLists.RemoveDups(list);
             //linkedLists.RemoveDupsWithoutBuffer(list);
             //var a = linkedLists.ReturnKthToLast(list, 2);
             //linkedLists.Partition(list, 3);
-            var a = linkedLists.Add2(list, list1);
+            //var a = linkedLists.Add2(list, list1);
+            var a = linkedLists.IsPalindrome(list);
             #endregion
 
             Console.ReadLine();

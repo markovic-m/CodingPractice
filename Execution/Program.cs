@@ -4,13 +4,213 @@ using CodingPractice.DataStructures.Queue;
 using CodingPractice.DataStructures.Stack;
 using CodingPractice.DataStructures.Tree;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Execution
 {
+    public class Solution
+    {
+        public int LengthOfLongestSubstring(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return 0;
+            if (s.Length == 1)
+                return 1;
+            var hs = new HashSet<char>();
+            var startInd = 0;
+            var endInd = 0;
+            var maxLength = 1;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!hs.Contains(s[i]))
+                {
+                    hs.Add(s[i]);
+                    endInd++;
+                    var max = endInd - startInd;
+                    if (max > maxLength)
+                        maxLength = max;
+                }
+                else
+                {
+                    endInd++;
+                    do
+                    {
+                        if (s[startInd] != s[i])
+                            hs.Remove(s[startInd]);
+                        startInd++;
+                    }
+                    while (s[startInd] != s[i]);
+                    startInd++;
+                }
+            }
+            return maxLength;
+        }
+    }
+    public class LRUCache
+    {
+        class Node
+        {
+            public int val;
+            public int key;
+            public Node next;
+            public Node prev;
+            public Node(int key, int value, Node nextNode, Node prevNode)
+            {
+                this.key = key;
+                val = value;
+                next = nextNode;
+                prev = prevNode;
+            }
+        }
+        Node head;
+        Node tail;
+        int capacity = 0;
+        Dictionary<int, Node> dict;
+        public LRUCache(int capacity)
+        {
+            dict = new Dictionary<int, Node>(capacity);
+            this.capacity = capacity;
+        }
+
+        public int Get(int key)
+        {
+            char a = (char)97;
+            if (dict.TryGetValue(key, out Node valueFound))
+            {
+                if (valueFound.next != null)
+                    valueFound.next.prev = valueFound.prev;
+                else
+                    RemoveFromTail();
+                if (valueFound.prev != null)
+                    valueFound.prev.next = valueFound.next;
+                else
+                    RemoveFromHead();
+
+                AddToHead(key, valueFound.val);
+                return valueFound.val;
+            }
+            return -1;
+        }
+
+        public void Put(int key, int value)
+        {
+            if (dict.ContainsKey(key))
+            {
+                if (dict[key].prev != null)
+                {
+                    dict[key].prev.next = dict[key].next;
+                }
+                else
+                {
+                    RemoveFromHead();
+                }
+                if (dict[key].next != null)
+                {
+                    dict[key].next.prev = dict[key].prev;
+                }
+                else
+                {
+                    RemoveFromTail();
+                }
+                dict[key] = AddToHead(key, value);
+                return;
+            }
+
+            if (dict.Count == capacity)
+            {
+                dict.Remove(tail.key);
+                RemoveFromTail();
+                dict.Add(key, AddToHead(key, value));
+            }
+            else
+            {
+                dict.Add(key, AddToHead(key, value));
+            }
+
+        }
+
+        private Node AddToHead(int key, int val)
+        {
+            Node tempNode = null;
+            if (head == null)
+            {
+                tempNode = new Node(key, val, null, null);
+                head = tempNode;
+                tail = tempNode;
+            }
+            else
+            {
+                tempNode = new Node(key, val, head, null);
+                head.prev = tempNode;
+                head = tempNode;
+            }
+            return tempNode;
+        }
+        private void RemoveFromTail()
+        {
+            tail = tail.prev;
+            if (tail != null)
+                tail.next = null;
+        }
+        private void RemoveFromHead()
+        {
+            head = head.next;
+            if (head != null)
+                head.prev = null;
+        }
+    }
+
+    /**
+     * Your LRUCache object will be instantiated and called as such:
+     * LRUCache obj = new LRUCache(capacity);
+     * int param_1 = obj.Get(key);
+     * obj.Put(key,value);
+     */
     class Program
     {
         static void Main(string[] args)
         {
+
+
+            private List<int> swap(List<int> lst, int i, int j)
+            {
+                var temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+                return list;
+            }
+
+
+            Solution sadsas = new Solution();
+            sadsas.LengthOfLongestSubstring("pwwkew");
+            int capacity = 10;
+            LRUCache obj = new LRUCache(capacity);
+            obj.Put(10, 13);
+            obj.Put(3, 17);
+            obj.Put(6, 11);
+            obj.Put(10, 5);
+            obj.Put(0, 10);
+            int param_1 = obj.Get(13);
+            obj.Put(2, 19);
+            int param_3 = obj.Get(2);
+            int param_2 = obj.Get(3);
+            int param_4 = obj.Get(4);
+            int param_5 = obj.Get(5);
+            int param_6 = obj.Get(6);
+            obj.Put(6, 11);
+            obj.Put(6, 11);
+            obj.Put(6, 11);
+            obj.Put(6, 11);
+            obj.Put(6, 11);
+            obj.Put(6, 11);
+            obj.Put(6, 11);
+            obj.Put(6, 11);
+            int param2 = obj.Get(2);
+            obj.Put(4, 4);
+            int param1 = obj.Get(1);
+            int param3 = obj.Get(3);
+            int para4 = obj.Get(4);
             //TestDynamicArray();
             //TestSinglyLinkedList();
             //TestDoublyLinkedList();
@@ -37,7 +237,7 @@ namespace Execution
 
         public static void TestQeueue()
         {
-            var queue = new Queue<int>();
+            var queue = new CodingPractice.DataStructures.Queue.Queue<int>();
             queue.Print();
             queue.Enqueue(1);
             queue.Print();
